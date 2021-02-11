@@ -3,8 +3,6 @@ import { AppLoading } from "expo-app-loading";
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
-import NavigationBar from "../components/NavigationBar";
-
 import api from "../services/api";
 
 import {
@@ -50,7 +48,11 @@ const Landing = () => {
   } else {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.header}></View>
+        <View style={styles.header}>
+          <View style={styles.titleWrap}>
+            <Text style={styles.currencyName}>DOGE</Text>
+          </View>
+        </View>
         <View style={styles.body}>
           <Text style={styles.title}>Cotação Atual</Text>
           <View
@@ -111,6 +113,23 @@ const styles = StyleSheet.create({
     flexBasis: "20%",
     alignItems: "center",
   },
+  titleWrap: {
+    justifyContent: "center",
+    alignSelf: "center",
+    alignItems: "center",
+    height: 30,
+    width: "20%",
+    backgroundColor: "#80379A",
+    marginTop: 50,
+    elevation: 5,
+    borderBottomWidth: 0.3,
+    borderLeftWidth: 0.3,
+  },
+  currencyName: {
+    color: "white",
+    fontFamily: "Nunito_800ExtraBold",
+  },
+
   title: {
     marginTop: 45,
     justifyContent: "center",
