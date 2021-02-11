@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { AppLoading } from "expo-app-loading";
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 
 import api from "../services/api";
 
 import HomeGraph from "../components/HomeGraph";
+
+import arrow from "../../assets/arrow.png";
 
 import {
   Nunito_400Regular,
@@ -53,6 +55,25 @@ const Landing = () => {
         <View style={styles.header}>
           <View style={styles.titleWrap}>
             <Text style={styles.currencyName}>DOGE</Text>
+            <View
+              style={{
+                height: 30,
+                left: 10,
+              }}
+            >
+              <Image
+                source={arrow}
+                style={{
+                  height: 20,
+                  width: 20,
+                  marginRight: 7,
+                  borderWidth: 1,
+                  paddingLeft: 10,
+                  borderRadius: 50,
+                  marginTop: 5,
+                }}
+              />
+            </View>
           </View>
           <HomeGraph />
         </View>
@@ -117,6 +138,8 @@ const styles = StyleSheet.create({
   },
   titleWrap: {
     justifyContent: "center",
+
+    flexDirection: "row",
     alignSelf: "center",
     alignItems: "center",
     height: 30,
@@ -125,6 +148,7 @@ const styles = StyleSheet.create({
     marginTop: 80,
     borderBottomWidth: 0.3,
     borderLeftWidth: 0.3,
+    elevation: 5,
   },
   currencyName: {
     color: "white",
