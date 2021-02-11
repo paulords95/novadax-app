@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: "#494949",
     height: "30%",
-    bottom: 0,
     marginTop: -30,
   },
 });
