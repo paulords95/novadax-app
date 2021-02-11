@@ -87,7 +87,6 @@ const Landing = () => {
             </View>
           </View>
         </View>
-        <NavigationBar />
       </SafeAreaView>
     );
   }
