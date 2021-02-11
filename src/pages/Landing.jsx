@@ -5,6 +5,8 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 import api from "../services/api";
 
+import HomeGraph from "../components/HomeGraph";
+
 import {
   Nunito_400Regular,
   Nunito_600SemiBold,
@@ -51,6 +53,7 @@ const Landing = () => {
         <View style={styles.header}>
           <View style={styles.titleWrap}>
             <Text style={styles.currencyName}>DOGE</Text>
+            <HomeGraph />
           </View>
         </View>
         <View style={styles.body}>
