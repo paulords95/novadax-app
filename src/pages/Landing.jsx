@@ -53,8 +53,8 @@ const Landing = () => {
         <View style={styles.header}>
           <View style={styles.titleWrap}>
             <Text style={styles.currencyName}>DOGE</Text>
-            <HomeGraph />
           </View>
+          <HomeGraph />
         </View>
         <View style={styles.body}>
           <Text style={styles.title}>Cotação Atual</Text>
@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     width: "20%",
     backgroundColor: "#80379A",
     marginTop: 50,
-    elevation: 5,
     borderBottomWidth: 0.3,
     borderLeftWidth: 0.3,
   },

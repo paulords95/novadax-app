@@ -22,6 +22,7 @@ const Wallet = () => {
   } else {
     return (
       <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>Carteira</Text>
         <View style={styles.body}></View>
       </SafeAreaView>
     );
@@ -32,17 +33,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    top: 25,
     backgroundColor: "#4C66AB",
   },
   body: {
     backgroundColor: "#743095",
-    height: "93%",
+    height: "90%",
     width: "98%",
     borderRadius: 30,
     zIndex: 1,
     elevation: 15,
-    top: 10,
+    top: 25,
+  },
+  title: {
+    justifyContent: "center",
+    color: "white",
+    fontFamily: "Nunito_800ExtraBold",
+    fontSize: 25,
+    top: 25,
   },
 });
 

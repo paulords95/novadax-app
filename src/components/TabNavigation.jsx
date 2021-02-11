@@ -35,13 +35,12 @@ export default function TabNavigation() {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
-
             if (route.name === "Home") {
               iconName = focused;
               return (
                 <View
                   style={{
-                    backgroundColor: focused ? "#DADCD5" : "transparent",
+                    backgroundColor: focused ? "#4285F4" : "transparent",
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
@@ -58,7 +57,7 @@ export default function TabNavigation() {
               return (
                 <View
                   style={{
-                    backgroundColor: focused ? "#DADCD5" : "transparent",
+                    backgroundColor: focused ? "#4285F4" : "transparent",
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
@@ -75,7 +74,7 @@ export default function TabNavigation() {
               return (
                 <View
                   style={{
-                    backgroundColor: focused ? "#DADCD5" : "transparent",
+                    backgroundColor: focused ? "#4285F4" : "transparent",
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
@@ -93,7 +92,7 @@ export default function TabNavigation() {
         tabBarOptions={{
           activeTintColor: "transparent",
           inactiveTintColor: "transparent",
-          style: { height: 70, marginBottom: 0 },
+          style: { height: 70, marginBottom: 0, backgroundColor: "#E5E9FD" },
         }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
