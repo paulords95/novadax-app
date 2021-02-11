@@ -1,9 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { AppLoading } from "expo-app-loading";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 import NavigationBar from "../components/NavigationBar";
+
+import api from "../services/api";
 
 import {
   Nunito_400Regular,
@@ -21,31 +23,74 @@ const Landing = () => {
     Nunito_800ExtraBold,
   });
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}></View>
-      <View style={styles.body}>
-        <Text style={styles.title}>Cotação Atual</Text>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
-          <View style={styles.priceWrap}>
-            <Text style={styles.priceText}>Compra: </Text>
-            <Text style={styles.priceValue}>0,39</Text>
+  const [dogePrice, setDogePrice] = useState({
+    ask: "",
+    bid: "",
+    high24h: "",
+    low24h: "",
+  });
+
+  useEffect(() => {
+    api
+      .get("/v1/market/ticker?symbol=DOGE_BRL")
+      .then((data) => {
+        setDogePrice(data.data.data);
+      })
+      .then(() => {
+        setInterval(() => {
+          api.get("/v1/market/ticker?symbol=DOGE_BRL").then((data) => {
+            setDogePrice(data.data.data);
+          });
+        }, 5000);
+      });
+  }, []);
+
+  if (!fontsLoaded) {
+    return <Text>Carregando</Text>;
+  } else {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.header}></View>
+        <View style={styles.body}>
+          <Text style={styles.title}>Cotação Atual</Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <View style={styles.priceWrap}>
+              <Text style={styles.priceText}>Compra: </Text>
+              <Text style={styles.priceValue}>{dogePrice.ask}</Text>
+            </View>
+            <View style={styles.priceWrap}>
+              <Text style={styles.priceText}>Venda: </Text>
+              <Text style={styles.priceValue}>{dogePrice.bid}</Text>
+            </View>
           </View>
-          <View style={styles.priceWrap}>
-            <Text style={styles.priceText}>Venda: </Text>
-            <Text style={styles.priceValue}>0,39</Text>
+          <Text style={styles.subTitle}>Últimas 24 horas</Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <View style={styles.priceWrap}>
+              <Text style={styles.priceText}>Alta: </Text>
+              <Text style={styles.priceValue}>{dogePrice.high24h}</Text>
+            </View>
+            <View style={styles.priceWrap}>
+              <Text style={styles.priceText}>Baixa: </Text>
+              <Text style={styles.priceValue}>{dogePrice.low24h}</Text>
+            </View>
           </View>
         </View>
-      </View>
-      <NavigationBar />
-    </SafeAreaView>
-  );
+        <NavigationBar />
+      </SafeAreaView>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -78,6 +123,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 10,
     paddingHorizontal: 50,
+    height: 25,
   },
   priceText: {
     color: "white",
@@ -88,6 +134,12 @@ const styles = StyleSheet.create({
     color: "#C6BDBD",
     fontFamily: "Nunito_600SemiBold",
     fontSize: 15,
+  },
+  subTitle: {
+    justifyContent: "center",
+    color: "white",
+    fontFamily: "Nunito_800ExtraBold",
+    fontSize: 20,
   },
 });
 
