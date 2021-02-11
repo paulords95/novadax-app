@@ -30,7 +30,7 @@ const HomeGraph = () => {
         data: [
           0.2,
           0.2,
-          28,
+          0.28,
           0.8,
           0.99,
           0.43,
@@ -41,7 +41,7 @@ const HomeGraph = () => {
           0.1,
           0.2,
           0.2,
-          28,
+          0.28,
           0.8,
           0.99,
           0.43,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    top: 70,
+    top: 30,
   },
 });
 

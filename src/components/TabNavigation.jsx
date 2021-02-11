@@ -40,13 +40,13 @@ export default function TabNavigation() {
               return (
                 <View
                   style={{
-                    backgroundColor: focused ? "#4285F4" : "transparent",
+                    backgroundColor: focused ? "#4C66AB" : "transparent",
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
                     paddingHorizontal: "40%",
                     paddingVertical: 38,
-                    marginTop: 20,
+                    marginTop: 22,
                   }}
                 >
                   <Image source={homeBtn} style={{ width: 30, height: 30 }} />
@@ -57,13 +57,13 @@ export default function TabNavigation() {
               return (
                 <View
                   style={{
-                    backgroundColor: focused ? "#4285F4" : "transparent",
+                    backgroundColor: focused ? "#4C66AB" : "transparent",
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
                     paddingHorizontal: "40%",
                     paddingVertical: 38,
-                    marginTop: 20,
+                    marginTop: 22,
                   }}
                 >
                   <Image source={walletBtn} style={{ width: 30, height: 30 }} />
@@ -74,13 +74,13 @@ export default function TabNavigation() {
               return (
                 <View
                   style={{
-                    backgroundColor: focused ? "#4285F4" : "transparent",
+                    backgroundColor: focused ? "#4C66AB" : "transparent",
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
                     paddingHorizontal: "40%",
                     paddingVertical: 38,
-                    marginTop: 20,
+                    marginTop: 22,
                   }}
                 >
                   <Image source={keyBtn} style={{ width: 30, height: 30 }} />
@@ -92,7 +92,14 @@ export default function TabNavigation() {
         tabBarOptions={{
           activeTintColor: "transparent",
           inactiveTintColor: "transparent",
-          style: { height: 70, marginBottom: 0, backgroundColor: "#E5E9FD" },
+          style: {
+            height: 70,
+            marginBottom: 1,
+            backgroundColor: "#743095",
+            borderColor: "#743095",
+            borderTopLeftRadius: 5,
+            borderTopRightRadius: 5,
+          },
         }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />

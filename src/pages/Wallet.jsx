@@ -37,19 +37,19 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: "#743095",
-    height: "90%",
-    width: "98%",
+    height: "85%",
+    width: "92%",
     borderRadius: 30,
     zIndex: 1,
     elevation: 15,
-    top: 25,
+    top: 60,
   },
   title: {
     justifyContent: "center",
     color: "white",
     fontFamily: "Nunito_800ExtraBold",
     fontSize: 25,
-    top: 25,
+    top: 50,
   },
 });
 

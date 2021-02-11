@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#4C66AB",
     marginTop: -35,
     flex: 1,
-    flexBasis: "20%",
     alignItems: "center",
   },
   titleWrap: {
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
     height: 30,
     width: "20%",
     backgroundColor: "#80379A",
-    marginTop: 50,
+    marginTop: 80,
     borderBottomWidth: 0.3,
     borderLeftWidth: 0.3,
   },
