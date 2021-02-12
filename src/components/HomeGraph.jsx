@@ -28,19 +28,20 @@ const HomeGraph = () => {
   const [lastPrice, setLastPrice] = useState([0]);
 
   useEffect(() => {
-    apiLocal
-      .get("/recentprices")
-      .then((res) => {
-        const result = [];
-        for (let i of res.data) {
-          result.push(i.recent_prices);
-        }
-
-        setLastPrice(result);
-      })
-      .catch((e) => {
-        throw e;
-      });
+    setInterval(() => {
+      apiLocal
+        .get("/recentprices")
+        .then((res) => {
+          const result = [];
+          for (let i of res.data) {
+            result.push(parseFloat(i.recent_prices));
+          }
+          setLastPrice(result);
+        })
+        .catch((e) => {
+          throw e;
+        });
+    }, 10000);
   }, []);
 
   const data = {
@@ -58,18 +59,24 @@ const HomeGraph = () => {
     color: (opacity = 1) => `rgba(246, 246, 246, ${opacity})`,
   };
 
+  const Graph = () => {
+    return (
+      <LineChart
+        data={data}
+        width={Dimensions.get("window").width - 50}
+        height={250}
+        chartConfig={chartConfig}
+      />
+    );
+  };
+
   if (!fontsLoaded) {
     return <Text>Carregando</Text>;
   } else {
     return (
       <SafeAreaView style={styles.container}>
         <View>
-          <LineChart
-            data={data}
-            width={Dimensions.get("window").width - 50}
-            height={250}
-            chartConfig={chartConfig}
-          />
+          <Graph />
         </View>
       </SafeAreaView>
     );
