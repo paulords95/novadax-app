@@ -5,7 +5,7 @@ import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 
 import { apiDax } from "../services/api";
 
-import HomeGraph from "../components/HomeGraph";
+import PriceGraph from "../components/PriceGraph";
 
 import arrow from "../../assets/arrow.png";
 
@@ -75,7 +75,7 @@ const Landing = () => {
               />
             </View>
           </View>
-          <HomeGraph />
+          <PriceGraph />
         </View>
         <View style={styles.body}>
           <Text style={styles.title}>Cotação Atual</Text>
@@ -87,12 +87,16 @@ const Landing = () => {
             }}
           >
             <View style={styles.priceWrap}>
-              <Text style={styles.priceText}>Compra: </Text>
-              <Text style={styles.priceValue}>{dogePrice.ask}</Text>
+              <Text style={styles.priceText}>Compra</Text>
+              <Text style={styles.priceValue}>
+                {parseFloat(dogePrice.ask).toFixed(4)}
+              </Text>
             </View>
             <View style={styles.priceWrap}>
-              <Text style={styles.priceText}>Venda: </Text>
-              <Text style={styles.priceValue}>{dogePrice.bid}</Text>
+              <Text style={styles.priceText}>Venda</Text>
+              <Text style={styles.priceValue}>
+                {parseFloat(dogePrice.bid).toFixed(4)}
+              </Text>
             </View>
           </View>
           <Text style={styles.subTitle}>Últimas 24 horas</Text>
@@ -104,12 +108,16 @@ const Landing = () => {
             }}
           >
             <View style={styles.priceWrap}>
-              <Text style={styles.priceText}>Alta: </Text>
-              <Text style={styles.priceValue}>{dogePrice.high24h}</Text>
+              <Text style={styles.priceText}>Alta</Text>
+              <Text style={styles.priceValue}>
+                {parseFloat(dogePrice.high24h).toFixed(4)}
+              </Text>
             </View>
             <View style={styles.priceWrap}>
-              <Text style={styles.priceText}>Baixa: </Text>
-              <Text style={styles.priceValue}>{dogePrice.low24h}</Text>
+              <Text style={styles.priceText}>Baixa</Text>
+              <Text style={styles.priceValue}>
+                {parseFloat(dogePrice.low24h).toFixed(4)}
+              </Text>
             </View>
           </View>
         </View>
@@ -132,7 +140,7 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: "#4C66AB",
-    marginTop: -35,
+    marginTop: -30,
     flex: 1,
     alignItems: "center",
   },
@@ -148,7 +156,7 @@ const styles = StyleSheet.create({
     marginTop: 80,
     borderBottomWidth: 0.3,
     borderLeftWidth: 0.3,
-    elevation: 5,
+    elevation: 2,
   },
   currencyName: {
     color: "white",
@@ -163,20 +171,24 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   priceWrap: {
-    flexDirection: "row",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center",
     marginTop: 10,
-    paddingHorizontal: 50,
+    paddingHorizontal: 20,
     height: 25,
   },
   priceText: {
     color: "white",
     fontFamily: "Nunito_600SemiBold",
     fontSize: 15,
+    textAlign: "center",
   },
   priceValue: {
     color: "#C6BDBD",
     fontFamily: "Nunito_600SemiBold",
     fontSize: 15,
+    textAlign: "center",
   },
   subTitle: {
     justifyContent: "center",
