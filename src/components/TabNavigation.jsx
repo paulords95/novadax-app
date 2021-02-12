@@ -20,7 +20,14 @@ function WalletScreen() {
 
 const KeyScreen = () => {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#4C66AB",
+      }}
+    >
       <Text>Keys</Text>
     </View>
   );
@@ -44,9 +51,11 @@ export default function TabNavigation() {
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
-                    paddingHorizontal: "40%",
+                    paddingHorizontal: "37%",
                     paddingVertical: 38,
-                    marginTop: 22,
+                    marginTop: 25,
+                    borderTopLeftRadius: 15,
+                    marginLeft: 2,
                   }}
                 >
                   <Image source={homeBtn} style={{ width: 30, height: 30 }} />
@@ -61,9 +70,9 @@ export default function TabNavigation() {
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
-                    paddingHorizontal: "40%",
+                    paddingHorizontal: "37%",
                     paddingVertical: 38,
-                    marginTop: 22,
+                    marginTop: 25,
                   }}
                 >
                   <Image source={walletBtn} style={{ width: 30, height: 30 }} />
@@ -78,9 +87,11 @@ export default function TabNavigation() {
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
-                    paddingHorizontal: "40%",
+                    paddingHorizontal: "37%",
                     paddingVertical: 38,
-                    marginTop: 22,
+                    marginTop: 25,
+                    borderTopRightRadius: 15,
+                    marginRight: 2,
                   }}
                 >
                   <Image source={keyBtn} style={{ width: 30, height: 30 }} />
@@ -94,11 +105,10 @@ export default function TabNavigation() {
           inactiveTintColor: "transparent",
           style: {
             height: 70,
-            marginBottom: 1,
             backgroundColor: "#743095",
             borderColor: "#743095",
-            borderTopLeftRadius: 5,
-            borderTopRightRadius: 5,
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15,
           },
         }}
       >

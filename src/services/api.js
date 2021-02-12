@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const api = axios.create({
+const apiDax = axios.create({
   baseURL: "https://api.novadax.com",
 });
 
-export default api;
+const apiLocal = axios.create({
+  baseURL: "http://192.168.2.52:1234",
+});
+
+module.exports = { apiDax, apiLocal };
