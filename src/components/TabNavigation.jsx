@@ -54,7 +54,7 @@ export default function TabNavigation() {
                     paddingHorizontal: "37%",
                     paddingVertical: 38,
                     marginTop: 25,
-                    borderTopLeftRadius: 15,
+                    borderTopLeftRadius: 5,
                     marginLeft: 2,
                   }}
                 >
@@ -90,7 +90,7 @@ export default function TabNavigation() {
                     paddingHorizontal: "37%",
                     paddingVertical: 38,
                     marginTop: 25,
-                    borderTopRightRadius: 15,
+                    borderTopRightRadius: 5,
                     marginRight: 2,
                   }}
                 >
@@ -107,8 +107,6 @@ export default function TabNavigation() {
             height: 70,
             backgroundColor: "#743095",
             borderColor: "#743095",
-            borderTopLeftRadius: 15,
-            borderTopRightRadius: 15,
           },
         }}
       >

@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#743095",
     height: "85%",
     width: "92%",
-    borderRadius: 30,
+    borderRadius: 10,
     zIndex: 1,
-    elevation: 15,
+    elevation: 7,
     top: 60,
   },
   title: {

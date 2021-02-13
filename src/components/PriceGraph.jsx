@@ -14,7 +14,7 @@ const PriceGraph = () => {
       .then((res) => {
         const result = [];
         for (let i of res.data) {
-          const number = parseFloat(i.recent_prices).toFixed(3);
+          const number = parseFloat(i.recent_prices).toFixed(4);
           result.push(parseFloat(number));
         }
         setLastPrice(result.reverse());
@@ -28,7 +28,7 @@ const PriceGraph = () => {
         .then((res) => {
           const result = [];
           for (let i of res.data) {
-            const number = parseFloat(i.recent_prices).toFixed(3);
+            const number = parseFloat(i.recent_prices).toFixed(4);
             result.push(parseFloat(number));
           }
           setLastPrice(result.reverse());

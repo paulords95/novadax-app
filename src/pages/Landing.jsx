@@ -26,10 +26,10 @@ const Landing = () => {
   });
 
   const [dogePrice, setDogePrice] = useState({
-    ask: "",
-    bid: "",
-    high24h: "",
-    low24h: "",
+    ask: 0,
+    bid: 0,
+    high24h: 0,
+    low24h: 0,
   });
 
   useEffect(() => {
@@ -129,6 +129,7 @@ const Landing = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#4C66AB",
   },
   header: {
     backgroundColor: "#743095",
@@ -136,7 +137,9 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
     borderBottomLeftRadius: 30,
     zIndex: 1,
-    elevation: 15,
+    elevation: 7,
+    width: "97%",
+    alignSelf: "center",
   },
   body: {
     backgroundColor: "#4C66AB",
@@ -146,7 +149,6 @@ const styles = StyleSheet.create({
   },
   titleWrap: {
     justifyContent: "center",
-
     flexDirection: "row",
     alignSelf: "center",
     alignItems: "center",
@@ -154,9 +156,9 @@ const styles = StyleSheet.create({
     width: "20%",
     backgroundColor: "#80379A",
     marginTop: 80,
-    borderBottomWidth: 0.3,
-    borderLeftWidth: 0.3,
+    borderWidth: 0.3,
     elevation: 2,
+    borderColor: "#4C66AB",
   },
   currencyName: {
     color: "white",
