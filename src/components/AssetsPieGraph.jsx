@@ -4,9 +4,23 @@ import Spinner from "react-native-loading-spinner-overlay";
 
 import { PieChart } from "react-native-chart-kit";
 
+import {
+  Nunito_400Regular,
+  Nunito_600SemiBold,
+  Nunito_700Bold,
+  Nunito_800ExtraBold,
+  useFonts,
+} from "@expo-google-fonts/nunito";
+
 import { apiLocal } from "../services/api";
 
 const AssetsPieGraph = () => {
+  let [fontsLoaded, error] = useFonts({
+    Nunito_400Regular,
+    Nunito_600SemiBold,
+    Nunito_700Bold,
+    Nunito_800ExtraBold,
+  });
   const [totalNetWorth, setTotalNetWorth] = useState(0);
   const [assetsInfo, setAssetsInfo] = useState([]);
   const [data, setData] = useState([
@@ -134,10 +148,24 @@ const AssetsPieGraph = () => {
   const RenderWalletInfo = () => {
     return (
       <View style={styles.walletInfo}>
-        <Text style={{ color: "white", alignSelf: "center", fontSize: 18 }}>
+        <Text
+          style={{
+            color: "white",
+            alignSelf: "center",
+            fontSize: 18,
+            fontFamily: "Nunito_600SemiBold",
+          }}
+        >
           Patrimônio Total
         </Text>
-        <Text style={{ color: "#C6BDBD", alignSelf: "center", fontSize: 18 }}>
+        <Text
+          style={{
+            color: "#C6BDBD",
+            alignSelf: "center",
+            fontSize: 18,
+            fontFamily: "Nunito_600SemiBold",
+          }}
+        >
           R${totalNetWorth}
         </Text>
         <Text style={styles.subTitle}>Valor por ativos</Text>
@@ -160,9 +188,16 @@ const AssetsPieGraph = () => {
                     flexDirection: "row",
                   }}
                 >
-                  <Text style={{ color: "white" }}>
+                  <Text
+                    style={{ color: "white", fontFamily: "Nunito_600SemiBold" }}
+                  >
                     {item.currency}:{" "}
-                    <Text style={{ color: "#C6BDBD" }}>
+                    <Text
+                      style={{
+                        color: "#C6BDBD",
+                        fontFamily: "Nunito_600SemiBold",
+                      }}
+                    >
                       R${item.balanceInFiat}
                     </Text>
                   </Text>
@@ -174,13 +209,16 @@ const AssetsPieGraph = () => {
       </View>
     );
   };
-
-  return (
-    <View style={{}}>
-      <RenderPieChart populate={data} />
-      {load ? <RenderWalletInfo /> : <View />}
-    </View>
-  );
+  if (!fontsLoaded) {
+    return <Text>Carregando</Text>;
+  } else {
+    return (
+      <View style={{}}>
+        <RenderPieChart populate={data} />
+        {load ? <RenderWalletInfo /> : <View />}
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -193,6 +231,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 40,
     fontSize: 16,
+    fontFamily: "Nunito_600SemiBold",
   },
 });
 
