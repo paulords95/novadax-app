@@ -29,6 +29,10 @@
     "web": {
       "favicon": "./assets/icon.png"
     },
-    "description": ""
+    "description": "",
+    "androidNavigationBar": {
+     "barStyle": "light-content",
+     "backgroundColor":"#743095"
+   }
   }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, View, Text, StyleSheet } from "react-native";
+import { Dimensions, View, Text, StyleSheet, Button } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
 import { PieChart } from "react-native-chart-kit";
@@ -8,6 +8,7 @@ import { apiLocal } from "../services/api";
 
 const AssetsPieGraph = () => {
   const [totalNetWorth, setTotalNetWorth] = useState(0);
+  const [assetsInfo, setAssetsInfo] = useState([]);
   const [data, setData] = useState([
     {
       name: "Carregando",
@@ -47,11 +48,13 @@ const AssetsPieGraph = () => {
             color: graphColor(i.currency),
             legendFontColor: "white",
             legendFontSize: 15,
+            balanceInFiat: i.balanceInFiat,
           });
         }
       }
       setLoad(true);
       setData(graphData);
+      setAssetsInfo(dataApi.data);
       setInterval(async () => {
         const dataApi = await apiLocal.get("/walletbalancepercentage");
         const graphData = [];
@@ -68,10 +71,16 @@ const AssetsPieGraph = () => {
           }
         }
         setLoad(true);
+
         setData(graphData);
       }, 5000);
     })();
   }, []);
+
+  setInterval(async () => {
+    const dataApi = await apiLocal.get("/walletbalancepercentage");
+    setAssetsInfo(dataApi.data);
+  }, 5000);
 
   const RenderPieChart = (props) => {
     if (load) {
@@ -126,9 +135,42 @@ const AssetsPieGraph = () => {
     return (
       <View style={styles.walletInfo}>
         <Text style={{ color: "white", alignSelf: "center", fontSize: 18 }}>
-          Patrimônio Total:{" "}
-          <Text style={{ color: "#C6BDBD" }}>{totalNetWorth}</Text>
+          Patrimônio Total
         </Text>
+        <Text style={{ color: "#C6BDBD", alignSelf: "center", fontSize: 18 }}>
+          R${totalNetWorth}
+        </Text>
+        <Text style={styles.subTitle}>Valor por ativos</Text>
+        <View
+          style={{
+            flexWrap: "wrap",
+            flex: 1,
+            alignContent: "center",
+          }}
+        >
+          {assetsInfo.map((item) => {
+            if (item.balance != undefined) {
+              return (
+                <View
+                  key={Math.random() * 100}
+                  style={{
+                    top: 10,
+                    paddingHorizontal: 30,
+                    paddingVertical: 10,
+                    flexDirection: "row",
+                  }}
+                >
+                  <Text style={{ color: "white" }}>
+                    {item.currency}:{" "}
+                    <Text style={{ color: "#C6BDBD" }}>
+                      R${item.balanceInFiat}
+                    </Text>
+                  </Text>
+                </View>
+              );
+            }
+          })}
+        </View>
       </View>
     );
   };
@@ -145,6 +187,12 @@ const styles = StyleSheet.create({
   walletInfo: {
     height: 200,
     marginTop: 50,
+  },
+  subTitle: {
+    color: "white",
+    alignSelf: "center",
+    marginTop: 40,
+    fontSize: 16,
   },
 });
 
