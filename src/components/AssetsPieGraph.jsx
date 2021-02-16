@@ -91,10 +91,12 @@ const AssetsPieGraph = () => {
     })();
   }, []);
 
-  setInterval(async () => {
-    const dataApi = await apiLocal.get("/walletbalancepercentage");
-    setAssetsInfo(dataApi.data);
-  }, 5000);
+  useEffect(() => {
+    setInterval(async () => {
+      const dataApi = await apiLocal.get("/walletbalancepercentage");
+      setAssetsInfo(dataApi.data);
+    }, 5000);
+  }, []);
 
   const RenderPieChart = (props) => {
     if (load) {
