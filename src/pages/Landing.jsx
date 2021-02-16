@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
     borderBottomLeftRadius: 30,
     zIndex: 1,
-    elevation: 7,
+    elevation: 4,
     width: "97%",
     alignSelf: "center",
   },

@@ -1,51 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { PieChart } from "react-native-svg-charts";
 import { Text } from "react-native-svg";
-import { apisAreAvailable } from "expo";
 
 import { apiLocal } from "../services/api";
+import { View } from "react-native";
 
 const AssetsGraph = () => {
   const colors = ["#600080", "#E5A4FD", "#D966FF", "#FAFAFA", "#9900CC"];
+  const [load, setLoad] = useState(false);
 
-  const [walletInfo, setWalletInfo] = useState([
-    {
-      key: 0,
-      amount: 2,
-      svg: { fill: colors[parseInt(Math.random() * colors.length)] },
-    },
-    {
-      key: 2,
-      amount: 10,
-      svg: { fill: colors[parseInt(Math.random() * colors.length)] },
-    },
-    {
-      key: 4,
-      amount: 20,
-      svg: { fill: colors[parseInt(Math.random() * colors.length)] },
-    },
-  ]);
-
-  console.log();
+  const walletInfo = [];
 
   useEffect(() => {
     apiLocal
       .get("/walletbalancepercentage")
       .then((res) => {
-        //console.log(res.data);
+        res.data.map((data) => {
+          if (data.percentage != undefined) {
+            walletInfo.push({
+              key: parseFloat(data.balanceInFiat),
+              amount: parseFloat(data.percentage),
+              svg: { fill: "#600080" },
+            });
+            setLoad(true);
+          }
+        });
       })
       .catch((e) => {
         console.log(e.message);
       });
 
     setInterval(() => {
+      console.log(walletInfo);
       apiLocal
         .get("/walletbalancepercentage")
-        .then((res) => {})
+        .then((res) => {
+          res.data.map((data) => {
+            if (data.percentage != undefined) {
+              walletInfo.push({
+                key: parseFloat(data.balanceInFiat),
+                amount: parseFloat(data.percentage),
+                svg: { fill: "#600080" },
+              });
+              setLoad(true);
+            }
+          });
+        })
         .catch((e) => {
           console.log(e.message);
         });
-    }, 5000);
+    }, 10000);
   }, []);
 
   const Labels = ({ slices, height, width }) => {
@@ -63,7 +67,7 @@ const AssetsGraph = () => {
           stroke={"black"}
           strokeWidth={0.2}
         >
-          {data.amount + "1"}
+          {data.amount}
         </Text>
       );
     });
@@ -83,7 +87,7 @@ const AssetsGraph = () => {
     );
   };
 
-  return <RenderChart />;
+  return <View>{load ? <RenderChart /> : <View />}</View>;
 };
 
 export default AssetsGraph;
