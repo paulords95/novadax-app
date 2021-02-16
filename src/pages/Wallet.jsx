@@ -10,6 +10,7 @@ import {
 } from "@expo-google-fonts/nunito";
 
 import AssetsGraph from "../components/AssetsGraph";
+import AssetsPieGraph from "../components/AssetsPieGraph";
 
 const Wallet = () => {
   let [fontsLoaded, error] = useFonts({
@@ -26,7 +27,7 @@ const Wallet = () => {
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>Carteira</Text>
         <View style={styles.body}>
-          <AssetsGraph />
+          <AssetsPieGraph />
         </View>
       </SafeAreaView>
     );

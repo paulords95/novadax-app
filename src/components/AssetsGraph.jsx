@@ -31,7 +31,6 @@ const AssetsGraph = () => {
       });
 
     setInterval(() => {
-      console.log(walletInfo);
       apiLocal
         .get("/walletbalancepercentage")
         .then((res) => {
@@ -67,27 +66,37 @@ const AssetsGraph = () => {
           stroke={"black"}
           strokeWidth={0.2}
         >
-          {data.amount}
+          {data.amount + "1"}
         </Text>
       );
     });
   };
 
-  const RenderChart = () => {
-    return (
-      <PieChart
-        style={{ height: 300, marginTop: 50 }}
-        valueAccessor={({ item }) => item.amount}
-        data={walletInfo}
-        spacing={0}
-        outerRadius={"95%"}
-      >
-        <Labels />
-      </PieChart>
-    );
+  const renderChart = () => {
+    if (load) {
+      return (
+        <PieChart
+          style={{ height: 300, marginTop: 50 }}
+          valueAccessor={({ item }) => item.amount}
+          data={walletInfo}
+          spacing={0}
+          outerRadius={"95%"}
+        >
+          <Labels />
+        </PieChart>
+      );
+    } else {
+      return <Text>Teste</Text>;
+    }
   };
 
-  return <View>{load ? <RenderChart /> : <View />}</View>;
+  return (
+    <View>
+      {useEffect(() => {
+        renderChart();
+      }, [walletInfo])}
+    </View>
+  );
 };
 
 export default AssetsGraph;
