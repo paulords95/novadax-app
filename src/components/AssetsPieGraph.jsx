@@ -111,7 +111,7 @@ const AssetsPieGraph = () => {
           paddingLeft={"20"}
           center={[10, 0]}
           style={{
-            marginTop: 70,
+            marginTop: 30,
           }}
         />
       );
@@ -154,8 +154,8 @@ const AssetsPieGraph = () => {
                 <View
                   key={Math.random() * 100}
                   style={{
-                    top: 10,
-                    paddingHorizontal: 30,
+                    top: -5,
+                    paddingHorizontal: 15,
                     paddingVertical: 10,
                     flexDirection: "row",
                   }}
