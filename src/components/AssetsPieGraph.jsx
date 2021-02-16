@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, View, Text } from "react-native";
+import { Dimensions, View, Text, StyleSheet } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 import { PieChart } from "react-native-chart-kit";
 
@@ -51,6 +52,24 @@ const AssetsPieGraph = () => {
       }
       setLoad(true);
       setData(graphData);
+      setInterval(async () => {
+        const dataApi = await apiLocal.get("/walletbalancepercentage");
+        const graphData = [];
+        for (let i of dataApi.data) {
+          setTotalNetWorth(i.totalAssets);
+          if (i.balance != undefined) {
+            graphData.push({
+              name: i.currency,
+              balance: parseFloat(i.percentage),
+              color: graphColor(i.currency),
+              legendFontColor: "white",
+              legendFontSize: 15,
+            });
+          }
+        }
+        setLoad(true);
+        setData(graphData);
+      }, 5000);
     })();
   }, []);
 
@@ -88,16 +107,45 @@ const AssetsPieGraph = () => {
         />
       );
     } else {
-      return <Text>Carregadno</Text>;
+      return (
+        <View>
+          <Spinner
+            style={{ top: -100 }}
+            visible={true}
+            textContent={"Carregando"}
+            textStyle={{
+              color: "#FFF",
+            }}
+          />
+        </View>
+      );
     }
+  };
+
+  const RenderWalletInfo = () => {
+    return (
+      <View style={styles.walletInfo}>
+        <Text style={{ color: "white", alignSelf: "center", fontSize: 18 }}>
+          Patrimônio Total:{" "}
+          <Text style={{ color: "#C6BDBD" }}>{totalNetWorth}</Text>
+        </Text>
+      </View>
+    );
   };
 
   return (
     <View style={{}}>
       <RenderPieChart populate={data} />
-      <Text>{totalNetWorth}</Text>
+      {load ? <RenderWalletInfo /> : <View />}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  walletInfo: {
+    height: 200,
+    marginTop: 50,
+  },
+});
 
 export default AssetsPieGraph;
