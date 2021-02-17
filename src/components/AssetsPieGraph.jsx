@@ -38,13 +38,13 @@ const AssetsPieGraph = () => {
   const graphColor = (name) => {
     let color = "";
     if (name == "BTC") {
-      color = "#A658CC";
+      color = "#F7931A";
     }
     if (name == "DOGE") {
-      color = "#6B029D";
+      color = "#BA9F33";
     }
     if (name == "ETH") {
-      color = "#BC7FDA";
+      color = "#8D8D8D";
     }
     return color;
   };
@@ -154,7 +154,7 @@ const AssetsPieGraph = () => {
             color: "white",
             alignSelf: "center",
             fontSize: 18,
-            fontFamily: "Nunito_600SemiBold",
+            fontFamily: "Nunito_700Bold",
           }}
         >
           Patrimônio Total
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 40,
     fontSize: 16,
-    fontFamily: "Nunito_600SemiBold",
+    fontFamily: "Nunito_700Bold",
   },
 });
 
