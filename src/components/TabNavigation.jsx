@@ -52,9 +52,10 @@ export default function TabNavigation() {
                     justifyContent: "center",
                     alignItems: "center",
                     paddingHorizontal: "37%",
-                    paddingVertical: 38,
-                    marginTop: 25,
+                    paddingVertical: 35,
+                    marginTop: 15,
                     borderTopLeftRadius: 5,
+                    borderRadius: 5,
                     marginLeft: 2,
                   }}
                 >
@@ -71,8 +72,9 @@ export default function TabNavigation() {
                     justifyContent: "center",
                     alignItems: "center",
                     paddingHorizontal: "37%",
-                    paddingVertical: 38,
-                    marginTop: 25,
+                    paddingVertical: 35,
+                    borderRadius: 5,
+                    marginTop: 15,
                   }}
                 >
                   <Image source={walletBtn} style={{ width: 30, height: 30 }} />
@@ -88,9 +90,9 @@ export default function TabNavigation() {
                     justifyContent: "center",
                     alignItems: "center",
                     paddingHorizontal: "37%",
-                    paddingVertical: 38,
-                    marginTop: 25,
-                    borderTopRightRadius: 5,
+                    paddingVertical: 35,
+                    marginTop: 15,
+                    borderRadius: 5,
                     marginRight: 2,
                   }}
                 >
@@ -107,6 +109,7 @@ export default function TabNavigation() {
             height: 70,
             backgroundColor: "#743095",
             borderColor: "#743095",
+            bottom: 5,
           },
         }}
       >

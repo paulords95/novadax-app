@@ -42,11 +42,11 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: "#743095",
-    height: "85%",
+    height: "84%",
     width: "92%",
     borderRadius: 10,
     zIndex: 1,
-    elevation: 7,
+    elevation: 5,
     top: 60,
   },
   title: {
