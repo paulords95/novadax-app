@@ -175,6 +175,9 @@ const AssetsPieGraph = () => {
             flexWrap: "wrap",
             flex: 1,
             alignContent: "center",
+            alignSelf: "center",
+            flexDirection: "row",
+            marginTop: 10,
           }}
         >
           {assetsInfo.map((item) => {
@@ -184,7 +187,7 @@ const AssetsPieGraph = () => {
                   key={Math.random() * 100}
                   style={{
                     top: -5,
-                    paddingHorizontal: 15,
+                    paddingHorizontal: 25,
                     paddingVertical: 10,
                     flexDirection: "row",
                   }}

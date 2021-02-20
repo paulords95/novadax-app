@@ -34,13 +34,13 @@ const Landing = () => {
 
   useEffect(() => {
     apiDax
-      .get("/v1/market/ticker?symbol=DOGE_BRL")
+      .get("/v1/market/ticker?symbol=BTC_BRL")
       .then((data) => {
         setDogePrice(data.data.data);
       })
       .then(() => {
         setInterval(() => {
-          apiDax.get("/v1/market/ticker?symbol=DOGE_BRL").then((data) => {
+          apiDax.get("/v1/market/ticker?symbol=BTC_BRL").then((data) => {
             setDogePrice(data.data.data);
           });
         }, 5000);
@@ -89,13 +89,13 @@ const Landing = () => {
             <View style={styles.priceWrap}>
               <Text style={styles.priceText}>Compra</Text>
               <Text style={styles.priceValue}>
-                {parseFloat(dogePrice.ask).toFixed(4)}
+                {parseFloat(dogePrice.ask.toLocaleString("pt-BR")).toFixed(2)}
               </Text>
             </View>
             <View style={styles.priceWrap}>
               <Text style={styles.priceText}>Venda</Text>
               <Text style={styles.priceValue}>
-                {parseFloat(dogePrice.bid).toFixed(4)}
+                {parseFloat(dogePrice.bid.toLocaleString("pt-BR")).toFixed(2)}
               </Text>
             </View>
           </View>
@@ -110,13 +110,17 @@ const Landing = () => {
             <View style={styles.priceWrap}>
               <Text style={styles.priceText}>Alta</Text>
               <Text style={styles.priceValue}>
-                {parseFloat(dogePrice.high24h).toFixed(4)}
+                {parseFloat(dogePrice.high24h.toLocaleString("pt-BR")).toFixed(
+                  2
+                )}
               </Text>
             </View>
             <View style={styles.priceWrap}>
               <Text style={styles.priceText}>Baixa</Text>
               <Text style={styles.priceValue}>
-                {parseFloat(dogePrice.low24h).toFixed(4)}
+                {parseFloat(dogePrice.low24h.toLocaleString("pt-BR")).toFixed(
+                  2
+                )}
               </Text>
             </View>
           </View>

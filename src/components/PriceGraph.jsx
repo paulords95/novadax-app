@@ -14,8 +14,8 @@ const PriceGraph = () => {
       .then((res) => {
         const result = [];
         for (let i of res.data) {
-          const number = parseFloat(i.recent_prices).toFixed(4);
-          result.push(parseFloat(number));
+          const number = Math.round(i.recent_prices);
+          result.push(number);
         }
         setLastPrice(result.reverse());
       })
@@ -28,15 +28,15 @@ const PriceGraph = () => {
         .then((res) => {
           const result = [];
           for (let i of res.data) {
-            const number = parseFloat(i.recent_prices).toFixed(4);
-            result.push(parseFloat(number));
+            const number = Math.round(i.recent_prices);
+            result.push(number);
           }
           setLastPrice(result.reverse());
         })
         .catch((e) => {
           throw e;
         });
-    }, 5000);
+    }, 1000);
   }, []);
 
   const data = lastPrice;
@@ -59,7 +59,7 @@ const PriceGraph = () => {
           fontSize: 10,
         }}
         numberOfTicks={10}
-        formatLabel={(value) => `${parseFloat(value).toFixed(4)}`}
+        formatLabel={(value) => `${value}`}
       />
       <LineChart
         style={{ flex: 1, marginLeft: 16 }}
