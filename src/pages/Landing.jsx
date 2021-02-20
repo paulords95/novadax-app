@@ -55,7 +55,7 @@ const Landing = () => {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <View style={styles.titleWrap}>
-            <Text style={styles.currencyName}>DOGE</Text>
+            <Text style={styles.currencyName}>BTC</Text>
             <View
               style={{
                 height: 30,
