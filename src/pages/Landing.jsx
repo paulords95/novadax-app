@@ -43,6 +43,7 @@ const Landing = () => {
           apiDax.get("/v1/market/ticker?symbol=BTC_BRL").then((data) => {
             setDogePrice(data.data.data);
           });
+          const price = dogePrice.ask;
         }, 5000);
       });
   }, []);
@@ -89,7 +90,7 @@ const Landing = () => {
             <View style={styles.priceWrap}>
               <Text style={styles.priceText}>Compra</Text>
               <Text style={styles.priceValue}>
-                {parseFloat(dogePrice.ask.toLocaleString("pt-BR")).toFixed(2)}
+                {parseFloat(dogePrice.ask).toString().toLocaleString("pt-BR")}
               </Text>
             </View>
             <View style={styles.priceWrap}>
