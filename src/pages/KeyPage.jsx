@@ -99,10 +99,16 @@ const styles = StyleSheet.create({
   },
   saveBtnTxt: {
     color: "white",
-    fontFamily: "Nunito_400Regular",
+    fontFamily: "Nunito_800ExtraBold",
+    fontSize: 25,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
   saveBtn: {
-    backgroundColor: "blue",
+    backgroundColor: "#206DB0",
+    borderRadius: 5,
+    marginTop: 20,
+    elevation: 5,
   },
 });
 
