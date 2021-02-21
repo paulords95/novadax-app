@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Landing from "../pages/Landing";
 import Wallet from "../pages/Wallet";
+import KeyPage from "../pages/KeyPage";
 
 import homeBtn from "../../assets/home-btn.png";
 import walletBtn from "../../assets/wallet-btn.png";
@@ -19,18 +20,7 @@ function WalletScreen() {
 }
 
 const KeyScreen = () => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#4C66AB",
-      }}
-    >
-      <Text>Keys</Text>
-    </View>
-  );
+  return <KeyPage />;
 };
 
 const Tab = createBottomTabNavigator();
