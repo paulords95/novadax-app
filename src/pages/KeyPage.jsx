@@ -16,6 +16,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/nunito";
 import { RectButton } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const KeyPage = () => {
   let [fontsLoaded, error] = useFonts({
@@ -24,6 +25,27 @@ const KeyPage = () => {
     Nunito_700Bold,
     Nunito_800ExtraBold,
   });
+
+  const storeUser = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("keys", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getUser = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("keys");
+      const result = JSON.parse(jsonValue);
+
+      if (result != null) {
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   if (!fontsLoaded) {
     return <Text>Carregando</Text>;
@@ -78,7 +100,7 @@ const styles = StyleSheet.create({
     width: "70%",
     alignSelf: "center",
     textAlign: "justify",
-    marginTop: 20,
+    marginTop: 30,
   },
   publicKeyInput: {
     height: 40,
