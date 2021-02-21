@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: "#743095",
-    height: "65%",
+    height: "55%",
     borderBottomRightRadius: 30,
     borderBottomLeftRadius: 30,
     zIndex: 1,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     height: 30,
     width: "20%",
     backgroundColor: "#80379A",
-    marginTop: 80,
+    marginTop: 60,
     borderWidth: 0.3,
     elevation: 2,
     borderColor: "#4C66AB",
