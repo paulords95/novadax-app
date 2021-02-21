@@ -41,7 +41,7 @@ const KeyPage = () => {
           <Text style={styles.inputTitle}>Secret Key</Text>
           <TextInput style={styles.publicKeyInput} textContentType="password" />
           <RectButton style={styles.saveBtn}>
-            <Text style={styles.saveBtnTxt}>Gravar</Text>
+            <Text style={styles.saveBtnTxt}>Salvar</Text>
           </RectButton>
         </View>
       </SafeAreaView>
@@ -99,16 +99,16 @@ const styles = StyleSheet.create({
   },
   saveBtnTxt: {
     color: "white",
-    fontFamily: "Nunito_800ExtraBold",
-    fontSize: 25,
+    fontFamily: "Nunito_600SemiBold",
+    fontSize: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
   },
   saveBtn: {
     backgroundColor: "#206DB0",
     borderRadius: 5,
-    marginTop: 20,
-    elevation: 5,
+    marginTop: 15,
+    elevation: 2,
   },
 });
 

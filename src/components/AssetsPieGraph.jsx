@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     color: "white",
     alignSelf: "center",
     marginTop: 40,
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "Nunito_700Bold",
   },
 });
