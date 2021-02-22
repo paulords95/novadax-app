@@ -187,9 +187,12 @@ const AssetsPieGraph = () => {
                   key={Math.random() * 100}
                   style={{
                     top: -5,
-                    paddingHorizontal: 25,
+                    flex: 1,
+                    paddingHorizontal: 15,
                     paddingVertical: 10,
                     flexDirection: "row",
+                    alignContent: "center",
+                    left: 10,
                   }}
                 >
                   <Text
@@ -200,6 +203,7 @@ const AssetsPieGraph = () => {
                       style={{
                         color: "#C6BDBD",
                         fontFamily: "Nunito_600SemiBold",
+                        alignSelf: "center",
                       }}
                     >
                       R${item.balanceInFiat}

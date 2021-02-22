@@ -26,7 +26,13 @@ const KeyPage = () => {
     Nunito_800ExtraBold,
   });
 
-  const storeUser = async (value) => {
+  const [defaultValue, setDefaultValue] = useState("");
+  const [keys, setKeys] = useState({
+    accessKey: "",
+    secretKey: "",
+  });
+
+  const storeKeys = async (value) => {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem("keys", jsonValue);
@@ -35,17 +41,27 @@ const KeyPage = () => {
     }
   };
 
-  const getUser = async () => {
+  const getKeys = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("keys");
       const result = JSON.parse(jsonValue);
 
       if (result != null) {
+        return result;
       }
     } catch (e) {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      const keys = await getKeys();
+      if (keys != undefined) {
+        setDefaultValue("***********************");
+      }
+    })();
+  }, []);
 
   if (!fontsLoaded) {
     return <Text>Carregando</Text>;
@@ -55,14 +71,40 @@ const KeyPage = () => {
         <Text style={styles.title}>Definir Chaves de API</Text>
         <View style={styles.body}>
           <Text style={styles.subTitle}>
-            É necessário gerar chaves de API na página da NovaDAX, é preicso
+            É necessário gerar chaves de API na página da NovaDAX, é preciso
             somente permissão para leitura e consulta.
           </Text>
           <Text style={styles.inputTitle}>Access Key</Text>
-          <TextInput style={styles.publicKeyInput} textContentType="password" />
+          <TextInput
+            defaultValue={defaultValue}
+            style={styles.publicKeyInput}
+            onChangeText={(text) => {
+              setKeys({
+                accessKey: text,
+                secretKey: keys.secretKey,
+              });
+            }}
+            textContentType="password"
+          />
           <Text style={styles.inputTitle}>Secret Key</Text>
-          <TextInput style={styles.publicKeyInput} textContentType="password" />
-          <RectButton style={styles.saveBtn}>
+          <TextInput
+            defaultValue={defaultValue}
+            style={styles.publicKeyInput}
+            onChangeText={(text) => {
+              setKeys({
+                accessKey: keys.accessKey,
+                secretKey: text,
+              });
+            }}
+            textContentType="password"
+          />
+          <RectButton
+            style={styles.saveBtn}
+            onPress={() => {
+              console.log(keys);
+              storeKeys(keys);
+            }}
+          >
             <Text style={styles.saveBtnTxt}>Salvar</Text>
           </RectButton>
         </View>
