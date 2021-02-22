@@ -58,7 +58,7 @@ const KeyPage = () => {
     (async () => {
       const keys = await getKeys();
       if (keys != undefined) {
-        setDefaultValue("***********************");
+        setDefaultValue("*************************************");
       }
     })();
   }, []);
@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginTop: 2,
     marginBottom: 20,
+    textAlign: "center",
   },
   inputTitle: {
     marginTop: 20,
