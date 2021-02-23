@@ -178,6 +178,7 @@ const AssetsPieGraph = () => {
             alignSelf: "center",
             flexDirection: "row",
             marginTop: 10,
+            width: "80%",
           }}
         >
           {assetsInfo.map((item) => {
@@ -188,11 +189,12 @@ const AssetsPieGraph = () => {
                   style={{
                     top: -5,
                     flex: 1,
-                    paddingHorizontal: 15,
+                    paddingHorizontal: 10,
                     paddingVertical: 10,
                     flexDirection: "row",
                     alignContent: "center",
                     left: 10,
+                    flexWrap: "wrap",
                   }}
                 >
                   <Text

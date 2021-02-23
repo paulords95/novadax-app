@@ -30,6 +30,7 @@ const KeyPage = () => {
   const [keys, setKeys] = useState({
     accessKey: "",
     secretKey: "",
+    defined: false,
   });
 
   const storeKeys = async (value) => {
@@ -58,6 +59,11 @@ const KeyPage = () => {
     (async () => {
       const keys = await getKeys();
       if (keys != undefined) {
+        setKeys({
+          accessKey: keys.accessKey,
+          secretKey: keys.secretKey,
+          defined: true,
+        });
         setDefaultValue("*************************************");
       }
     })();
@@ -76,36 +82,65 @@ const KeyPage = () => {
           </Text>
           <Text style={styles.inputTitle}>Access Key</Text>
           <TextInput
-            defaultValue={defaultValue}
+            placeholder={defaultValue}
             style={styles.publicKeyInput}
             onChangeText={(text) => {
               setKeys({
                 accessKey: text,
                 secretKey: keys.secretKey,
+                defined: keys.defined,
               });
             }}
             textContentType="password"
           />
           <Text style={styles.inputTitle}>Secret Key</Text>
           <TextInput
-            defaultValue={defaultValue}
+            placeholder={defaultValue}
             style={styles.publicKeyInput}
             onChangeText={(text) => {
               setKeys({
                 accessKey: keys.accessKey,
                 secretKey: text,
+                defined: keys.defined,
               });
             }}
             textContentType="password"
           />
           <RectButton
             style={styles.saveBtn}
-            onPress={() => {
-              console.log(keys);
-              storeKeys(keys);
+            onPress={async () => {
+              if (keys.defined) {
+                try {
+                  await AsyncStorage.removeItem("keys");
+                } catch (e) {
+                  console.log(e);
+                }
+                setDefaultValue("");
+                setKeys({
+                  accessKey: keys.accessKey,
+                  secretKey: keys.accessKey,
+                  defined: false,
+                });
+              } else if (
+                keys.accessKey.length < 5 ||
+                keys.secretKey.length < 5
+              ) {
+                setDefaultValue("Valor inválido");
+                console.log(keys);
+              } else {
+                storeKeys(keys);
+                setKeys({
+                  accessKey: keys.accessKey,
+                  secretKey: keys.accessKey,
+                  defined: true,
+                });
+                setDefaultValue("*************************************");
+              }
             }}
           >
-            <Text style={styles.saveBtnTxt}>Salvar</Text>
+            <Text style={styles.saveBtnTxt}>
+              {keys.defined ? "Apagar" : "Salvar"}
+            </Text>
           </RectButton>
         </View>
       </SafeAreaView>
