@@ -128,12 +128,12 @@ const KeyPage = () => {
                 setDefaultValue("Valor inválido");
                 console.log(keys);
               } else {
-                storeKeys(keys);
                 setKeys({
                   accessKey: keys.accessKey,
                   secretKey: keys.accessKey,
                   defined: true,
                 });
+                storeKeys(keys);
                 setDefaultValue("*************************************");
               }
             }}

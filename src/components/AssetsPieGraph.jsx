@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions, View, Text, StyleSheet, Button } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { PieChart } from "react-native-chart-kit";
 
@@ -34,6 +35,7 @@ const AssetsPieGraph = () => {
   ]);
   const [load, setLoad] = useState(false);
   let [, setState] = useState();
+  const [keysStored, setKeys] = useState([]);
 
   const graphColor = (name) => {
     let color = "";
@@ -47,6 +49,19 @@ const AssetsPieGraph = () => {
       color = "#8D8D8D";
     }
     return color;
+  };
+
+  const getKeys = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("keys");
+      const result = JSON.parse(jsonValue);
+
+      if (result != null) {
+        return result;
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
@@ -95,7 +110,16 @@ const AssetsPieGraph = () => {
     setInterval(async () => {
       const dataApi = await apiLocal.get("/walletbalancepercentage");
       setAssetsInfo(dataApi.data);
+      const keys = await getKeys();
+      setKeys(keys);
     }, 5000);
+    setInterval(() => {
+      console.log(keysStored);
+    }, 5000);
+    (async () => {
+      const keys = await getKeys();
+      setKeys(keys);
+    })();
   }, []);
 
   const RenderPieChart = (props) => {
@@ -221,6 +245,20 @@ const AssetsPieGraph = () => {
   };
   if (!fontsLoaded) {
     return <Text>Carregando</Text>;
+  } else if (!keysStored) {
+    console.log(keysStored);
+    return (
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "Nunito_700Bold",
+          alignSelf: "center",
+          top: "40%",
+        }}
+      >
+        Chave de API não definida
+      </Text>
+    );
   } else {
     return (
       <View style={{}}>
