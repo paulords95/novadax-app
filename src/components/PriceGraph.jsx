@@ -14,7 +14,6 @@ const PriceGraph = (props) => {
       .then((res) => {
         const result = [];
         for (let i of res.data) {
-          console.log(i.recent_prices);
           if (i.recent_prices < 1000) {
             result.push(parseFloat(i.recent_prices));
           } else {
@@ -43,6 +42,10 @@ const PriceGraph = (props) => {
     //    });
     //}, 1000);
   }, [props.currency]);
+
+  setInterval(() => {
+    props.currency = props.currency;
+  }, 1000);
 
   const data = lastPrice;
 
