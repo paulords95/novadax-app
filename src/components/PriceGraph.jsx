@@ -4,40 +4,45 @@ import { View } from "react-native";
 
 import { apiLocal } from "../services/api";
 
-const PriceGraph = () => {
+const PriceGraph = (props) => {
   const contentInset = { top: 5, bottom: 5 };
   const [lastPrice, setLastPrice] = useState([0]);
 
   useEffect(() => {
     apiLocal
-      .get("/recentprices")
+      .get(`/recentprices/${props.currency}`)
       .then((res) => {
         const result = [];
         for (let i of res.data) {
-          const number = Math.round(i.recent_prices);
-          result.push(number);
+          console.log(i.recent_prices);
+          if (i.recent_prices < 1000) {
+            result.push(parseFloat(i.recent_prices));
+          } else {
+            const number = Math.round(i.recent_prices);
+            result.push(number);
+          }
         }
         setLastPrice(result.reverse());
       })
       .catch((e) => {
         throw e.message;
       });
-    setInterval(() => {
-      apiLocal
-        .get("/recentprices")
-        .then((res) => {
-          const result = [];
-          for (let i of res.data) {
-            const number = Math.round(i.recent_prices);
-            result.push(number);
-          }
-          setLastPrice(result.reverse());
-        })
-        .catch((e) => {
-          throw e;
-        });
-    }, 1000);
-  }, []);
+    //setInterval(() => {
+    //  apiLocal
+    //    .get(`/recentprices/${props.currency}`)
+    //    .then((res) => {
+    //      const result = [];
+    //      for (let i of res.data) {
+    //        const number = Math.round(i.recent_prices);
+    //        result.push(number);
+    //      }
+    //      setLastPrice(result.reverse());
+    //    })
+    //    .catch((e) => {
+    //      throw e;
+    //    });
+    //}, 1000);
+  }, [props.currency]);
 
   const data = lastPrice;
 

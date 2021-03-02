@@ -68,7 +68,7 @@ const Landing = () => {
               <Picker.Item label={"ETH"} key={"ETH"} value={"ETH"} />
             </Picker>
           </View>
-          <PriceGraph />
+          <PriceGraph currency={pickerItem} />
         </View>
         <View style={styles.body}>
           <Text style={styles.title}>Cotação Atual</Text>
