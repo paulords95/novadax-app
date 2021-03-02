@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { AppLoading } from "expo-app-loading";
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 import { apiDax } from "../services/api";
 
@@ -55,26 +56,15 @@ const Landing = () => {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <View style={styles.titleWrap}>
-            <Text style={styles.currencyName}>BTC</Text>
-            <View
-              style={{
-                height: 30,
-                left: 10,
-              }}
+            <Picker
+              selectedValue={"''''1''''"}
+              mode="dropdown"
+              style={styles.userPicker}
+              onValueChange={(itemValue, itemIndex) => {}}
             >
-              <Image
-                source={arrow}
-                style={{
-                  height: 20,
-                  width: 20,
-                  marginRight: 7,
-                  borderWidth: 1,
-                  paddingLeft: 10,
-                  borderRadius: 50,
-                  marginTop: 5,
-                }}
-              />
-            </View>
+              <Picker.Item label={"BTC"} key={"BTC"} value={"BTC"} />
+              <Picker.Item label={"ADA"} key={"ADA"} value={"ADA"} />
+            </Picker>
           </View>
           <PriceGraph />
         </View>
@@ -157,13 +147,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "center",
     alignItems: "center",
-    height: 30,
-    width: "20%",
     backgroundColor: "#80379A",
     marginTop: 60,
     borderWidth: 0.3,
     elevation: 2,
     borderColor: "#4C66AB",
+    borderRadius: 5,
   },
   currencyName: {
     color: "white",
@@ -202,6 +191,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "Nunito_800ExtraBold",
     fontSize: 20,
+  },
+  userPicker: {
+    height: 35,
+    width: "30%",
+    borderRadius: 5,
+    color: "white",
   },
 });
 
