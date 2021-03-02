@@ -32,22 +32,20 @@ const Landing = () => {
     high24h: 0,
     low24h: 0,
   });
+  const [pickerItem, setPickerItem] = useState("BTC");
 
   useEffect(() => {
-    apiDax
-      .get("/v1/market/ticker?symbol=BTC_BRL")
-      .then((data) => {
-        setDogePrice(data.data.data);
-      })
-      .then(() => {
-        setInterval(() => {
-          apiDax.get("/v1/market/ticker?symbol=BTC_BRL").then((data) => {
-            setDogePrice(data.data.data);
-          });
-          const price = dogePrice.ask;
-        }, 5000);
-      });
-  }, []);
+    apiDax.get(`/v1/market/ticker?symbol=${pickerItem}_BRL`).then((data) => {
+      setDogePrice(data.data.data);
+    });
+
+    // setInterval(() => {
+    //   apiDax.get(`/v1/market/ticker?symbol=${pickerItem}_BRL`).then((data) => {
+    //     setDogePrice(data.data.data);
+    //   });
+    //   const price = dogePrice.ask;
+    // }, 5000);
+  }, [pickerItem]);
 
   if (!fontsLoaded) {
     return <Text>Carregando</Text>;
@@ -57,13 +55,17 @@ const Landing = () => {
         <View style={styles.header}>
           <View style={styles.titleWrap}>
             <Picker
-              selectedValue={"''''1''''"}
+              selectedValue={pickerItem}
               mode="dropdown"
               style={styles.userPicker}
-              onValueChange={(itemValue, itemIndex) => {}}
+              onValueChange={(itemValue, itemIndex) => {
+                setPickerItem(itemValue);
+              }}
             >
               <Picker.Item label={"BTC"} key={"BTC"} value={"BTC"} />
               <Picker.Item label={"ADA"} key={"ADA"} value={"ADA"} />
+              <Picker.Item label={"DOGE"} key={"DOGE"} value={"DOGE"} />
+              <Picker.Item label={"ETH"} key={"ETH"} value={"ETH"} />
             </Picker>
           </View>
           <PriceGraph />
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#80379A",
     marginTop: 60,
-    borderWidth: 0.3,
+    borderWidth: 0.5,
     elevation: 2,
     borderColor: "#4C66AB",
     borderRadius: 5,
