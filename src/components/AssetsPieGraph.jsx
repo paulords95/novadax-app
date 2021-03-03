@@ -68,29 +68,8 @@ const AssetsPieGraph = () => {
   useEffect(() => {
     (async () => {
       const keys = await getKeys();
-      const dataApi = await apiLocal.get(
-        `/walletbalancepercentage/${keys.accessKey}/${keys.secretKey}`
-      );
-      const graphData = [];
-      if (dataApi.data) {
-        for (let i of dataApi.data) {
-          setTotalNetWorth(i.totalAssets);
-          if (i.balance != undefined) {
-            graphData.push({
-              name: i.currency,
-              balance: parseFloat(i.percentage),
-              color: graphColor(i.currency),
-              legendFontColor: "white",
-              legendFontSize: 15,
-              balanceInFiat: i.balanceInFiat,
-            });
-          }
-        }
-      }
-      setLoad(true);
-      setData(graphData);
-      setAssetsInfo(dataApi.data);
-      setInterval(async () => {
+      setKeys(keys);
+      if (keys != undefined) {
         const dataApi = await apiLocal.get(
           `/walletbalancepercentage/${keys.accessKey}/${keys.secretKey}`
         );
@@ -112,28 +91,44 @@ const AssetsPieGraph = () => {
         }
         setLoad(true);
         setData(graphData);
-      }, 5000);
+        setAssetsInfo(dataApi.data);
+        setInterval(async () => {
+          const keys = await getKeys();
+          setKeys(keys);
+          if (keys != undefined) {
+            const dataApi = await apiLocal.get(
+              `/walletbalancepercentage/${keys.accessKey}/${keys.secretKey}`
+            );
+            const graphData = [];
+            if (dataApi.data) {
+              for (let i of dataApi.data) {
+                setTotalNetWorth(i.totalAssets);
+                if (i.balance != undefined) {
+                  graphData.push({
+                    name: i.currency,
+                    balance: parseFloat(i.percentage),
+                    color: graphColor(i.currency),
+                    legendFontColor: "white",
+                    legendFontSize: 15,
+                    balanceInFiat: i.balanceInFiat,
+                  });
+                }
+              }
+            }
+            setLoad(true);
+            setData(graphData);
+          } else {
+            setLoad(true);
+          }
+        }, 5000);
+      } else {
+        setLoad(true);
+      }
     })();
   }, []);
 
-  //useEffect(() => {
-  //  setInterval(async () => {
-  //    const dataApi = await apiLocal.get("/walletbalancepercentage");
-  //    setAssetsInfo(dataApi.data);
-  //    const keys = await getKeys();
-  //    setKeys(keys);
-  //  }, 5000);
-  //  setInterval(() => {
-  //    //console.log(keysStored);
-  //  }, 5000);
-  //  (async () => {
-  //    const keys = await getKeys();
-  //    setKeys(keys);
-  //  })();
-  //}, []);
-
   const RenderPieChart = (props) => {
-    if (load) {
+    if (load && keysStored != undefined) {
       return (
         <PieChart
           data={props.populate}
@@ -274,7 +269,6 @@ const AssetsPieGraph = () => {
       </Text>
     );
   } else if (!keysStored) {
-    console.log(keysStored);
     return (
       <Text
         style={{
