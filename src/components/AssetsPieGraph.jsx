@@ -117,6 +117,7 @@ const AssetsPieGraph = () => {
             }
             setLoad(true);
             setData(graphData);
+            setAssetsInfo(dataApi.data);
           } else {
             setLoad(true);
           }
