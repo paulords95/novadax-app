@@ -114,7 +114,7 @@ const AssetsPieGraph = () => {
       setKeys(keys);
     }, 5000);
     setInterval(() => {
-      console.log(keysStored);
+      //console.log(keysStored);
     }, 5000);
     (async () => {
       const keys = await getKeys();

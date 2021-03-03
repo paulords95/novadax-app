@@ -33,18 +33,12 @@ const Landing = () => {
     low24h: 0,
   });
   const [pickerItem, setPickerItem] = useState("BTC");
+  const [updatePrice, setUpdatePrice] = useState(0);
 
   useEffect(() => {
     apiDax.get(`/v1/market/ticker?symbol=${pickerItem}_BRL`).then((data) => {
       setDogePrice(data.data.data);
     });
-
-    // setInterval(() => {
-    //   apiDax.get(`/v1/market/ticker?symbol=${pickerItem}_BRL`).then((data) => {
-    //     setDogePrice(data.data.data);
-    //   });
-    //   const price = dogePrice.ask;
-    // }, 5000);
   }, [pickerItem]);
 
   if (!fontsLoaded) {

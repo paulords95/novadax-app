@@ -7,6 +7,7 @@ import { apiLocal } from "../services/api";
 const PriceGraph = (props) => {
   const contentInset = { top: 5, bottom: 5 };
   const [lastPrice, setLastPrice] = useState([0]);
+  const [updateGraph, setUpdateGraph] = useState(0);
 
   useEffect(() => {
     apiLocal
@@ -26,26 +27,7 @@ const PriceGraph = (props) => {
       .catch((e) => {
         throw e.message;
       });
-    //setInterval(() => {
-    //  apiLocal
-    //    .get(`/recentprices/${props.currency}`)
-    //    .then((res) => {
-    //      const result = [];
-    //      for (let i of res.data) {
-    //        const number = Math.round(i.recent_prices);
-    //        result.push(number);
-    //      }
-    //      setLastPrice(result.reverse());
-    //    })
-    //    .catch((e) => {
-    //      throw e;
-    //    });
-    //}, 1000);
   }, [props.currency]);
-
-  setInterval(() => {
-    props.currency = props.currency;
-  }, 1000);
 
   const data = lastPrice;
 
