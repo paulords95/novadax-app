@@ -83,6 +83,8 @@ const KeyPage = () => {
           <Text style={styles.inputTitle}>Access Key</Text>
           <TextInput
             placeholder={defaultValue}
+            contextMenuHidden
+            caretHidden
             style={styles.publicKeyInput}
             onChangeText={(text) => {
               setKeys({
@@ -96,6 +98,8 @@ const KeyPage = () => {
           <Text style={styles.inputTitle}>Secret Key</Text>
           <TextInput
             placeholder={defaultValue}
+            contextMenuHidden
+            caretHidden
             style={styles.publicKeyInput}
             onChangeText={(text) => {
               setKeys({
