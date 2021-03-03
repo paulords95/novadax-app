@@ -14,6 +14,7 @@ import {
 } from "@expo-google-fonts/nunito";
 
 import { apiLocal } from "../services/api";
+import AppLoading from "expo-app-loading";
 
 const AssetsPieGraph = () => {
   let [fontsLoaded, error] = useFonts({
@@ -66,27 +67,12 @@ const AssetsPieGraph = () => {
 
   useEffect(() => {
     (async () => {
-      const dataApi = await apiLocal.get("/walletbalancepercentage");
+      const keys = await getKeys();
+      const dataApi = await apiLocal.get(
+        `/walletbalancepercentage/${keys.accessKey}/${keys.secretKey}`
+      );
       const graphData = [];
-      for (let i of dataApi.data) {
-        setTotalNetWorth(i.totalAssets);
-        if (i.balance != undefined) {
-          graphData.push({
-            name: i.currency,
-            balance: parseFloat(i.percentage),
-            color: graphColor(i.currency),
-            legendFontColor: "white",
-            legendFontSize: 15,
-            balanceInFiat: i.balanceInFiat,
-          });
-        }
-      }
-      setLoad(true);
-      setData(graphData);
-      setAssetsInfo(dataApi.data);
-      setInterval(async () => {
-        const dataApi = await apiLocal.get("/walletbalancepercentage");
-        const graphData = [];
+      if (dataApi.data) {
         for (let i of dataApi.data) {
           setTotalNetWorth(i.totalAssets);
           if (i.balance != undefined) {
@@ -96,31 +82,55 @@ const AssetsPieGraph = () => {
               color: graphColor(i.currency),
               legendFontColor: "white",
               legendFontSize: 15,
+              balanceInFiat: i.balanceInFiat,
             });
           }
         }
+      }
+      setLoad(true);
+      setData(graphData);
+      setAssetsInfo(dataApi.data);
+      setInterval(async () => {
+        const dataApi = await apiLocal.get(
+          `/walletbalancepercentage/${keys.accessKey}/${keys.secretKey}`
+        );
+        const graphData = [];
+        if (dataApi.data) {
+          for (let i of dataApi.data) {
+            setTotalNetWorth(i.totalAssets);
+            if (i.balance != undefined) {
+              graphData.push({
+                name: i.currency,
+                balance: parseFloat(i.percentage),
+                color: graphColor(i.currency),
+                legendFontColor: "white",
+                legendFontSize: 15,
+                balanceInFiat: i.balanceInFiat,
+              });
+            }
+          }
+        }
         setLoad(true);
-
         setData(graphData);
       }, 5000);
     })();
   }, []);
 
-  useEffect(() => {
-    setInterval(async () => {
-      const dataApi = await apiLocal.get("/walletbalancepercentage");
-      setAssetsInfo(dataApi.data);
-      const keys = await getKeys();
-      setKeys(keys);
-    }, 5000);
-    setInterval(() => {
-      //console.log(keysStored);
-    }, 5000);
-    (async () => {
-      const keys = await getKeys();
-      setKeys(keys);
-    })();
-  }, []);
+  //useEffect(() => {
+  //  setInterval(async () => {
+  //    const dataApi = await apiLocal.get("/walletbalancepercentage");
+  //    setAssetsInfo(dataApi.data);
+  //    const keys = await getKeys();
+  //    setKeys(keys);
+  //  }, 5000);
+  //  setInterval(() => {
+  //    //console.log(keysStored);
+  //  }, 5000);
+  //  (async () => {
+  //    const keys = await getKeys();
+  //    setKeys(keys);
+  //  })();
+  //}, []);
 
   const RenderPieChart = (props) => {
     if (load) {
@@ -205,46 +215,64 @@ const AssetsPieGraph = () => {
             width: "80%",
           }}
         >
-          {assetsInfo.map((item) => {
-            if (item.balance != undefined) {
-              return (
-                <View
-                  key={Math.random() * 100}
-                  style={{
-                    top: -5,
-                    flex: 1,
-                    paddingHorizontal: 10,
-                    paddingVertical: 10,
-                    flexDirection: "row",
-                    alignContent: "center",
-                    left: 10,
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <Text
-                    style={{ color: "white", fontFamily: "Nunito_600SemiBold" }}
+          {assetsInfo ? (
+            assetsInfo.map((item) => {
+              if (item.balance != undefined) {
+                return (
+                  <View
+                    key={Math.random() * 100}
+                    style={{
+                      top: -5,
+                      flex: 1,
+                      paddingHorizontal: 10,
+                      paddingVertical: 10,
+                      flexDirection: "row",
+                      alignContent: "center",
+                      left: 10,
+                      flexWrap: "wrap",
+                    }}
                   >
-                    {item.currency}:{" "}
                     <Text
                       style={{
-                        color: "#C6BDBD",
+                        color: "white",
                         fontFamily: "Nunito_600SemiBold",
-                        alignSelf: "center",
                       }}
                     >
-                      R${item.balanceInFiat}
+                      {item.currency}:{" "}
+                      <Text
+                        style={{
+                          color: "#C6BDBD",
+                          fontFamily: "Nunito_600SemiBold",
+                          alignSelf: "center",
+                        }}
+                      >
+                        R${item.balanceInFiat}
+                      </Text>
                     </Text>
-                  </Text>
-                </View>
-              );
-            }
-          })}
+                  </View>
+                );
+              }
+            })
+          ) : (
+            <AppLoading />
+          )}
         </View>
       </View>
     );
   };
   if (!fontsLoaded) {
-    return <Text>Carregando</Text>;
+    return (
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "Nunito_700Bold",
+          alignSelf: "center",
+          top: "40%",
+        }}
+      >
+        Carregando
+      </Text>
+    );
   } else if (!keysStored) {
     console.log(keysStored);
     return (
@@ -257,6 +285,19 @@ const AssetsPieGraph = () => {
         }}
       >
         Chave de API não definida
+      </Text>
+    );
+  } else if (!assetsInfo) {
+    return (
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "Nunito_700Bold",
+          alignSelf: "center",
+          top: "40%",
+        }}
+      >
+        Chave de API incorreta
       </Text>
     );
   } else {

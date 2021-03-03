@@ -9,7 +9,6 @@ import {
   useFonts,
 } from "@expo-google-fonts/nunito";
 
-import AssetsGraph from "../components/AssetsGraph";
 import AssetsPieGraph from "../components/AssetsPieGraph";
 
 const Wallet = () => {
