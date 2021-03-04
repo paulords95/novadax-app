@@ -76,13 +76,15 @@ const Landing = () => {
             <View style={styles.priceWrap}>
               <Text style={styles.priceText}>Compra</Text>
               <Text style={styles.priceValue}>
-                {parseFloat(dogePrice.ask).toString().toLocaleString("pt-BR")}
+                {"R$" +
+                  parseFloat(dogePrice.ask).toString().toLocaleString("pt-BR")}
               </Text>
             </View>
             <View style={styles.priceWrap}>
               <Text style={styles.priceText}>Venda</Text>
               <Text style={styles.priceValue}>
-                {parseFloat(dogePrice.bid.toLocaleString("pt-BR")).toFixed(2)}
+                {"R$" +
+                  parseFloat(dogePrice.bid.toLocaleString("pt-BR")).toFixed(2)}
               </Text>
             </View>
           </View>
@@ -97,17 +99,19 @@ const Landing = () => {
             <View style={styles.priceWrap}>
               <Text style={styles.priceText}>Alta</Text>
               <Text style={styles.priceValue}>
-                {parseFloat(dogePrice.high24h.toLocaleString("pt-BR")).toFixed(
-                  2
-                )}
+                {"R$" +
+                  parseFloat(dogePrice.high24h.toLocaleString("pt-BR")).toFixed(
+                    2
+                  )}
               </Text>
             </View>
             <View style={styles.priceWrap}>
               <Text style={styles.priceText}>Baixa</Text>
               <Text style={styles.priceValue}>
-                {parseFloat(dogePrice.low24h.toLocaleString("pt-BR")).toFixed(
-                  2
-                )}
+                {"R$" +
+                  parseFloat(dogePrice.low24h.toLocaleString("pt-BR")).toFixed(
+                    2
+                  )}
               </Text>
             </View>
           </View>
