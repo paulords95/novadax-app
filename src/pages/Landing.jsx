@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   priceWrap: {
     flexDirection: "row",
     marginTop: 10,
-    paddingHorizontal: 50,
+    paddingHorizontal: 25,
     height: 25,
   },
   priceText: {
