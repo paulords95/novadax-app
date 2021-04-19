@@ -1,6 +1,6 @@
 # novadax-app
 
-Aplicativo em React Native que rastreia, aramazena e apresenta dados referentes a cotação de criptomoedas e status da carteira pessoal do usuário na exchange NovaDAX. Este app consome o seguinte back-end em Node.js [nova-dax-api](https://github.com/paulords95/nova-dax-api).
+Aplicativo em React Native para rastreamento, aramazenamento e apresentação de dados referentes a cotação de criptomoedas e status da carteira pessoal do usuário na exchange NovaDAX. Este app consome o seguinte back-end em Node.js [nova-dax-api](https://github.com/paulords95/nova-dax-api).
 
 Tecnologias utilizadas: React Native, Node.js e PostgreSQL.
 
